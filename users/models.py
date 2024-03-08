@@ -26,7 +26,7 @@ class CustomUserManager(BaseUserManager): # Before Custom User to allow properti
         return self.create_user(email, password, **extra_fields)
 
 # Custom User Model to include user information
-class CustomUser(AbstractUser):
+class customUser(AbstractUser):
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
     objects = CustomUserManager()
