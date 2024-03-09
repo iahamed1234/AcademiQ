@@ -15,6 +15,7 @@
     <ul>
         {% for course in request.user.enrolled_courses.all %}
             <li>{{ course.title }} - {{ course.description }}</li>
+             <a href="{% url 'materials:material_list' course.id %}">View Materials</a>
         {% empty %}
             <p>You have not enrolled in any courses yet.</p>
         {% endfor %}
