@@ -16,7 +16,9 @@
     <h3>Your Courses:</h3>
     <ul>
         {% for course in request.user.taught_courses.all %}
-        <li>{{ course.title }} - <a href="{% url 'courses:edit_course' course.id %}">Edit</a> | <a href="{% url 'materials:add_material' course.id %}">Add Material</a></li>
+        <li>{{ course.title }} - <a href="{% url 'courses:edit_course' course.id %}">Edit</a> 
+            | <a href="{% url 'materials:add_material' course.id %}">Add Material</a></li>
+            | <a href="{% url 'materials:material_list' course.id %}">View Materials</a>
     {% empty %}
         <li>No courses found.</li>
     {% endfor %}

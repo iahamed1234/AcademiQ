@@ -40,6 +40,10 @@
                                     {% endif %}
                                 </a>
                             {% empty %}
+                                {% if user.is_student and notification.type == 'new_material' %}
+                                <!-- Display notification for student about new material -->
+                                <a class="dropdown-item" href="#">{{ notification.message }}</a>
+                                {% endif %}
                                 <a class="dropdown-item" href="#">No new notifications</a>
                             {% endfor %}
                         </div>
