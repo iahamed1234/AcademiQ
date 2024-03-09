@@ -1,6 +1,7 @@
 from django.db import models
 # Code I wrote
 from django.contrib.auth.models import AbstractUser, BaseUserManager
+from django.conf import settings
 
 # Create your models here.
 # Custom User Manager for handling user creation
@@ -26,10 +27,24 @@ class CustomUserManager(BaseUserManager): # Before Custom User to allow properti
         return self.create_user(email, password, **extra_fields)
 
 # Custom User Model to include user information
-class CustomUser(AbstractUser):
+class customUser(AbstractUser):
+    real_name = models.CharField(max_length=100, blank=True, null=True)
+    photo = models.ImageField(upload_to='user_photos/', blank=True, null=True)
     is_teacher = models.BooleanField(default=False)
     is_student = models.BooleanField(default=False)
+    is_blocked = models.BooleanField(default=False)
     objects = CustomUserManager()
+
+# Profile to display status and other items on their home page
+class Profile(models.Model):
+    user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='profile')
+    bio = models.TextField(max_length=500, blank=True)
+    status_update = models.CharField(max_length=255, blank=True)
+    date_of_birth = models.DateField(null=True, blank=True)
+    # Add any other fields you might need
+
+    def __str__(self):
+        return f"{self.user.username}'s Profile"
 
 
 #End of Code I wrote
