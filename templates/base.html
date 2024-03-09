@@ -24,6 +24,27 @@
                 </ul>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
+                    <!-- Notifications Dropdown -->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Notifications
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <!-- display username or real name if available -->
+                            {% for notification in notifications %}
+                                <a class="dropdown-item" href="#">
+                                    {% if notification.recipient.real_name %}
+                                        {{ notification.recipient.real_name }}: {{ notification.message }}
+                                    {% else %}
+                                        {{ notification.recipient.username }}: {{ notification.message }}
+                                    {% endif %}
+                                </a>
+                            {% empty %}
+                                <a class="dropdown-item" href="#">No new notifications</a>
+                            {% endfor %}
+                        </div>
+                    </li>
+                    <!-- Logout Button -->
                     <li class="nav-item">
                         <form action="{% url 'logout' %}" method="post" style="display: inline;">
                             {% csrf_token %}

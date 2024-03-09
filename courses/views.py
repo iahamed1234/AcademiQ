@@ -4,6 +4,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth.decorators import login_required
 from .forms import CourseForm
 from .models import Course
+from Notifications.models import Notification
 from django.views.generic import ListView
 from users.models import customUser as User
 
@@ -52,6 +53,11 @@ def enroll_in_course(request, course_id):
     if request.method == "POST":
         # Add the current user to the enrolled_students
         course.enrolled_students.add(request.user)
+        # Create a notification for the teacher
+        Notification.objects.create(
+            recipient=course.teacher,
+            message=f"{User.username} has enrolled in your course: {course.title}."
+        )
         return redirect('courses:list_courses')  # Redirect to a confirmation page or back to the course list
     else:
         # Show a confirmation page or form before enrolling

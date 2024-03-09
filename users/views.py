@@ -5,6 +5,8 @@ from django.contrib.auth.decorators import login_required
 from .forms import ProfileForm
 from .models import Profile
 from .models import customUser as User
+from Notifications.models import Notification
+from courses.models import Course
 
 # Create your views here.
 # Registration View
@@ -67,3 +69,9 @@ def unblock_student(request, user_id):
         student.is_blocked = False
         student.save()
     return redirect('home')
+
+# For notification
+def dashboard(request):
+    message = f'{User.real_name or User.username} has enrolled in your course {Course.title}.'
+    notifications = Notification.objects.filter(recipient=request.user, is_read=False)
+    return render(request, 'dashboard.html', {'notifications': notifications})
