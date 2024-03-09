@@ -62,5 +62,20 @@ def enroll_in_course(request, course_id):
     else:
         # Show a confirmation page or form before enrolling
         return render(request, 'courses/enroll_confirm.html', {'course': course})
+    
+# Edit course
+@login_required
+def edit_course(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    if request.user != course.teacher:
+        return redirect('some_error_page')
+    if request.method == 'POST':
+        form = CourseForm(request.POST, instance=course)
+        if form.is_valid():
+            form.save()
+            return redirect('courses:list_courses')
+    else:
+        form = CourseForm(instance=course)
+    return render(request, 'courses/edit_course.html', {'form': form, 'course': course})
 
 # End of Code I wrote

@@ -12,14 +12,15 @@
     <!-- Button to create a new course -->
     <a href="{% url 'courses:create_course' %}" class="btn btn-primary">Create/Edit Course</a>
     
-    <!-- Optionally, list courses with an edit button -->
+    <!-- List courses with an edit button -->
     <h3>Your Courses:</h3>
     <ul>
-    {% for course in request.user.courses.all %}
-        <li>{{ course.title }} - <a href="{% url 'edit_course' course.id %}">Edit</a></li>
+        {% for course in request.user.taught_courses.all %}
+        <li>{{ course.title }} - <a href="{% url 'courses:edit_course' course.id %}">Edit</a> | <a href="{% url 'materials:add_material' course.id %}">Add Material</a></li>
     {% empty %}
         <li>No courses found.</li>
     {% endfor %}
+    </ul>
     <form method="GET" action="{% url 'search_students' %}">
         <input type="text" name="query" placeholder="Search Students"/>
         <button type="submit">Search</button>

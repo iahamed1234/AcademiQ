@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>Materials for {{ course.title }}</h2>
+    <ul>
+    {% for material in materials %}
+        <li>
+            {{ material.title }} - {{ material.description }}
+            <a href="{{ material.file.url }}" download>Download</a>
+        </li>
+    {% empty %}
+        <li>No materials found.</li>
+    {% endfor %}
+    </ul>
+</div>
+{% endblock %}
