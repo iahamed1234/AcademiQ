@@ -1,6 +1,7 @@
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth import get_user_model
 from django import forms
+from .models import Profile
 
 User = get_user_model()
 
@@ -31,3 +32,13 @@ class UserSignUpForm(UserCreationForm):
                 user.photo = self.cleaned_data['photo']
                 user.save()
         return user
+
+# To update profile on respective home page
+class ProfileForm(forms.ModelForm):
+    class Meta:
+        model = Profile
+        fields = ['bio', 'status_update', 'date_of_birth']
+        widgets = {
+            'date_of_birth': forms.DateInput(attrs={'type': 'date'})
+        }
+

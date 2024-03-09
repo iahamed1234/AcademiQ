@@ -1,6 +1,23 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Welcome to the Students Home Page</h1>
-<p>This is the Students home page of the application.</p>
+<h1>Welcome to the Student's Home Page</h1>
+<p>This is the Student's home page of the application.</p>
+<div class="container">
+    <h2>Welcome, {{ request.user.username }}</h2>
+    <p><strong>Bio:</strong> {{ request.user.profile.bio }}</p>
+    <p><strong>Status Update:</strong> {{ request.user.profile.status_update }}</p>
+    <p><strong>Date of Birth:</strong> {{ request.user.profile.date_of_birth }}</p>
+    <a href="{% url 'edit_profile' %}" class="btn btn-primary">Edit Profile</a>
+
+    <!-- List of enrolled courses -->
+    <h3>Enrolled Courses:</h3>
+    <ul>
+        {% for course in request.user.enrolled_courses.all %}
+            <li>{{ course.title }} - {{ course.description }}</li>
+        {% empty %}
+            <p>You have not enrolled in any courses yet.</p>
+        {% endfor %}
+    </ul>
+</div>
 {% endblock %}

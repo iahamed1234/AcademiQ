@@ -1,11 +1,19 @@
 {% extends 'base.html' %}
 
 {% block content %}
-  <h2>My Courses</h2>
-  <a href="{% url 'courses:create_course' %}">Create New Course</a>
-  <ul>
+<h2>Courses</h2>
+<ul>
     {% for course in courses %}
-      <li>{{ course.title }} - <a href="{% url 'courses:edit_course' course.id %}">Edit</a></li>
+    <li>
+        {{ course.title }} - {{ course.description }}
+        <!-- Check if user is logged in, not the teacher, and not already enrolled -->
+        {% if user.is_authenticated and not course.teacher == user and user not in course.enrolled_students.all %}
+            <form action="{% url 'courses:enroll_in_course' course.id %}" method="post">
+                {% csrf_token %}
+                <button type="submit">Enroll in this course</button>
+            </form>
+        {% endif %}
+    </li>
     {% endfor %}
-  </ul>
+</ul>
 {% endblock %}
