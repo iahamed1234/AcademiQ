@@ -20,10 +20,13 @@
                     <li class="nav-item active">
                         <a href="{% url 'courses:list_courses' %}" class="nav-item nav-link">Courses</a>
                     </li>
-                    <!-- Additional nav items -->
                 </ul>
                 <ul class="navbar-nav">
                     {% if user.is_authenticated %}
+                    <!-- Chat Room Link -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'chat_room' room_name='general' %}">Chat Room</a>
+                    </li>
                     <!-- Notifications Dropdown -->
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
