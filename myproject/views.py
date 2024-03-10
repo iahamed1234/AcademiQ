@@ -1,4 +1,5 @@
 from django.shortcuts import render
+# from Notifications.tasks import notify_users_about_new_material
 
 # Home View
 def home(request):
@@ -10,3 +11,4 @@ def home(request):
             # Logic for students
             return render(request, 'students_home.html')
     return render(request, 'home.html')
+

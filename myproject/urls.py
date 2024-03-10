@@ -33,6 +33,7 @@ urlpatterns = [
     path('accounts/', include('users.urls')),
     path('', views.home, name='home'),
     path('', include('communication.urls')),
+    path('Feedback/', include('Feedback.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # handle media
