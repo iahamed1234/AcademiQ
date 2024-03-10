@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container">
+    <h2>{{ profile_user.username }}'s Profile</h2>
+    <img src="{{ profile_user.photo.url }}" alt="{{ profile_user.username }}'s profile picture" style="width: 100px; height: 100px;">
+    <p><strong>Bio:</strong> {{ profile_user.profile.bio }}</p>
+    <p><strong>Status:</strong> {{ profile_user.profile.status_update }}</p>
+    <p><strong>Date of Birth:</strong> {{ profile_user.profile.date_of_birth }}</p>
+</div>
+{% endblock %}

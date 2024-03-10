@@ -23,12 +23,17 @@
         <li>No courses found.</li>
     {% endfor %}
     </ul>
+    <h2>Search User Profiles</h2>
+    <form method="GET" action="{% url 'user_search' %}">
+        <input type="text" name="query" placeholder="Search Users"/>
+        <button type="submit">Search</button>
+    </form>
     <form method="GET" action="{% url 'search_students' %}">
         <input type="text" name="query" placeholder="Search Students"/>
         <button type="submit">Search</button>
     </form>
     {% if students %}
-    <h2>Search Results</h2>
+    <h2>Search Students</h2>
     <ul>
         {% for student in students %}
             <p>{{ student.username }}
@@ -40,7 +45,7 @@
             </p>
         {% endfor %}
     </ul>
-{% endif %}
+    {% endif %}
     </ul>
 </div>
 {% endblock %}

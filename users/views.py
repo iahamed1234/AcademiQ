@@ -75,3 +75,17 @@ def dashboard(request):
     message = f'{User.real_name or User.username} has enrolled in your course {Course.title}.'
     notifications = Notification.objects.filter(recipient=request.user, is_read=False)
     return render(request, 'dashboard.html', {'notifications': notifications})
+
+# Search for user
+def user_search(request):
+    query = request.GET.get('query', '')
+    if query:
+        users = User.objects.filter(username__icontains=query)
+    else:
+        users = User.objects.none()
+    return render(request, 'users/user_search.html', {'users': users, 'query': query}) 
+
+# Display user profile
+def user_profile(request, username):
+    user = get_object_or_404(User, username=username)
+    return render(request, 'users/user_profile.html', {'profile_user': user})
