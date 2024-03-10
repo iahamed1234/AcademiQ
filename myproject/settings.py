@@ -45,6 +45,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
     # Code I wrote
+    'rest_framework',
     'users.apps.UsersConfig',
     'courses.apps.CoursesConfig',
     'materials.apps.MaterialsConfig', 
@@ -66,7 +67,7 @@ CHANNEL_LAYERS = {
     },
 }
 
-ASGI_APPLICATION = 'my_project.asgi.application'
+ASGI_APPLICATION = 'myproject.asgi.application'
 
 # End of Code I wrote
 
@@ -111,6 +112,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
+        'TEST': {
+            'NAME': BASE_DIR / 'test_db.sqlite3',
+        },
     }
 }
 
