@@ -26,4 +26,11 @@ def feedback_list(request, course_id):
     course = get_object_or_404(Course, id=course_id)
     feedbacks = Feedback.objects.filter(course=course)
     return render(request, 'feedback/feedback_list.html', {'feedbacks': feedbacks, 'course': course})
+
+# View for teacher to view feedback
+@login_required
+def view_feedback(request, course_id):
+    course = get_object_or_404(Course, id=course_id)
+    feedbacks = Feedback.objects.filter(course=course)
+    return render(request, 'feedback/view_feedback.html', {'course': course, 'feedbacks': feedbacks})
 # End of Code I wrote

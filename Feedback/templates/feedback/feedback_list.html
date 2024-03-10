@@ -1,5 +1,20 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h2>Congratulations on completing your course! Your feedback has been Submitted!</h2>
+<div class="container">
+    <h1>Feedback for {{ course.title }}</h1>
+    {% if feedbacks %}
+        <ul>
+            {% for feedback in feedbacks %}
+                <li>
+                    <strong>{{ feedback.user.username }}</strong>: {{ feedback.content }}
+                    <br>
+                    <small>Submitted on: {{ feedback.created_at|date:"Y-m-d H:i" }}</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No feedback has been submitted for this course yet.</p>
+    {% endif %}
+</div>
 {% endblock %}
