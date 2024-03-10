@@ -1,0 +1,67 @@
+<!-- templates/chat_room.html -->
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Chat Room</title>
+    <style>
+        /* Basic styling for chat */
+        .chat-log {
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin-bottom: 10px;
+            height: 300px;
+            overflow-y: scroll;
+        }
+        .chat-message {
+            margin: 5px 0;
+        }
+        input[type="text"] {
+            width: calc(100% - 110px);
+        }
+        input[type="submit"] {
+            width: 100px;
+        }
+    </style>
+</head>
+<body>
+    <h2>Chat Room: {{ room_name }}</h2>
+    <div class="chat-log"></div>
+    <input id="chat-message-input" type="text" size="100">
+    <input id="chat-message-submit" type="submit" value="Send">
+    
+    <script>
+        const roomName = "{{ room_name }}";
+        const chatLog = document.querySelector('.chat-log');
+        const chatInput = document.getElementById('chat-message-input');
+        const chatButton = document.getElementById('chat-message-submit');
+        
+        const wsScheme = window.location.protocol == "https:" ? "wss://" : "ws://";
+        const chatSocket = new WebSocket(
+            wsScheme + window.location.host + '/ws/chat/' + roomName + '/'
+        );
+        
+        chatSocket.onmessage = function(e) {
+            const data = JSON.parse(e.data);
+            document.querySelector('.chat-log').innerHTML += ('<div class="chat-message">' + data.message + '</div>');
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll to the latest message
+        };
+        
+        chatSocket.onclose = function(e) {
+            console.error('Chat socket closed unexpectedly');
+        };
+        
+        chatButton.onclick = function(e) {
+            const message = chatInput.value;
+            chatSocket.send(JSON.stringify({'message': message}));
+            chatInput.value = '';
+        };
+        
+        chatInput.onkeyup = function(e) {
+            if (e.keyCode === 13) {  // enter, return
+                chatButton.click();
+            }
+        };
+    </script>
+</body>
+</html>

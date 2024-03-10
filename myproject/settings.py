@@ -50,10 +50,25 @@ INSTALLED_APPS = [
     'materials.apps.MaterialsConfig', 
     'Notifications.apps.NotificationsConfig',  
     'Feedback.apps.FeedbackConfig',
-    'Communication.apps.CommunicationConfig',  
-    # End of Code I wrote
+    # For Web socket
+    'channels',
+    'communication',
     
 ]
+
+# Define the default channel layer for web socket
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels_redis.core.RedisChannelLayer',
+        'CONFIG': {
+            "hosts": [('127.0.0.1', 6379)],
+        },
+    },
+}
+
+ASGI_APPLICATION = 'my_project.asgi.application'
+
+# End of Code I wrote
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',

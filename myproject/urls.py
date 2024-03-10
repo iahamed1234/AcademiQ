@@ -32,6 +32,7 @@ urlpatterns = [
     path('materials/', include('materials.urls')),
     path('accounts/', include('users.urls')),
     path('', views.home, name='home'),
+    path('', include('communication.urls')),
 
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT) # handle media
