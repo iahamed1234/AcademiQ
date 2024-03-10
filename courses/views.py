@@ -37,10 +37,8 @@ def list_courses(request):
 #     if request.user.is_teacher:
 #         course = get_object_or_404(Course, pk=course_id)
 #         student = get_object_or_404(User, pk=user_id, is_student=True)
-#         # Assuming there's a ManyToManyField relationship named "students" on your Course model
 #         course.students.remove(student)
 #         course.save()
-#         # Redirect back to the course detail page or wherever appropriate
 #         return redirect('course_detail', course_id=course_id)
 #     else:
 #         # Redirect to home
@@ -58,9 +56,8 @@ def enroll_in_course(request, course_id):
             recipient=course.teacher,
             message=f"{User.username} has enrolled in your course: {course.title}."
         )
-        return redirect('courses:list_courses')  # Redirect to a confirmation page or back to the course list
+        return redirect('courses:list_courses')
     else:
-        # Show a confirmation page or form before enrolling
         return render(request, 'courses/enroll_confirm.html', {'course': course})
     
 # Edit course

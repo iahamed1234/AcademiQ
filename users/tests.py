@@ -1,7 +1,6 @@
 # python manage.py test users
 # Ran 2 tests in 0.270s
 # OK
-
 from django.test import TestCase
 from django.contrib.auth import get_user_model
 

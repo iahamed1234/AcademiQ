@@ -11,5 +11,4 @@ urlpatterns = [
     path('course/<int:course_id>/feedback/', view_feedback, name='view_feedback'),
     
 ]
-
 # End of Code I wrote

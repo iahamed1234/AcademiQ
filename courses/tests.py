@@ -30,7 +30,7 @@ class CourseFormTests(TestCase):
         data = {
             'title': 'Valid Course',
             'description': 'Valid description.',
-            'teacher': teacher.id,  # Assuming the form accepts teacher ID
+            'teacher': teacher.id,
         }
         form = CourseForm(data=data)
         self.assertTrue(form.is_valid())

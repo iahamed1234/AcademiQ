@@ -20,12 +20,11 @@ from django.urls import path, include
 from django.conf import settings
 from django.conf.urls.static import static
 from . import views
-# from django.contrib.auth.views import LoginView, LogoutView
 from django.contrib.auth import views as auth_views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('accounts/', include('django.contrib.auth.urls')),  # This line includes Django's built-in auth views
+    path('accounts/', include('django.contrib.auth.urls')),
     path('login/', auth_views.LoginView.as_view(), name='login'),
     path('logout/', auth_views.LogoutView.as_view(), name='logout'),
     path('courses/', include('courses.urls')),

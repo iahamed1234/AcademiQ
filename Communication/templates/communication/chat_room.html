@@ -46,7 +46,7 @@
         chatSocket.onmessage = function(e) {
             const data = JSON.parse(e.data);
             document.querySelector('.chat-log').innerHTML += ('<div class="chat-message">' + data.message + '</div>');
-            chatLog.scrollTop = chatLog.scrollHeight; // Auto-scroll to the latest message
+            chatLog.scrollTop = chatLog.scrollHeight; // Auto scroll
         };
         
         chatSocket.onclose = function(e) {
@@ -60,7 +60,7 @@
         };
         
         chatInput.onkeyup = function(e) {
-            if (e.keyCode === 13) {  // enter, return
+            if (e.keyCode === 13) {
                 chatButton.click();
             }
         };

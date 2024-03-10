@@ -4,8 +4,8 @@ from django.contrib.auth.models import AbstractUser, BaseUserManager
 from django.conf import settings
 
 # Create your models here.
-# Custom User Manager for handling user creation
-class CustomUserManager(BaseUserManager): # Before Custom User to allow properties to be available
+# Custom User handling user creation
+class CustomUserManager(BaseUserManager):
     def create_user(self, email, password=None, **extra_fields):
         if not email:
             raise ValueError('The Email field must be set')
@@ -41,9 +41,7 @@ class Profile(models.Model):
     bio = models.TextField(max_length=500, blank=True)
     status_update = models.CharField(max_length=255, blank=True)
     date_of_birth = models.DateField(null=True, blank=True)
-    # Add any other fields you might need
 
     def __str__(self):
         return f"{self.user.username}'s Profile"
-
 #End of Code I wrote

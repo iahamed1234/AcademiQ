@@ -19,7 +19,6 @@ class ChatConsumerTests(ChannelsLiveServerTestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        # Initialize the WebDriver. The specifics of this would depend on your local setup.
         cls.driver = webdriver.Chrome()
         cls.driver.implicitly_wait(10)
 
@@ -33,7 +32,7 @@ class ChatConsumerTests(ChannelsLiveServerTestCase):
             self.driver.get(self.live_server_url + "/chat/general/")
             self.assertIn("My Learning Site", self.driver.title)
 
-            # Simulate a user entering a message into the text input
+            # Simulate a user entering a message
             message_input = self.driver.find_element(By.ID, "chat-message-input")
             message_input.send_keys("Hello, world!")
 
@@ -41,7 +40,7 @@ class ChatConsumerTests(ChannelsLiveServerTestCase):
             send_button = self.driver.find_element(By.ID, "chat-message-submit")
             send_button.click()
 
-            # Wait for the message to be displayed in the chat log
+            # Wait for the message to be displayed
             WebDriverWait(self.driver, 2).until(
                 EC.text_to_be_present_in_element((By.CSS_SELECTOR, ".chat-log"), "Hello, world!")
             )

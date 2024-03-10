@@ -1,3 +1,4 @@
+# Code I wrote
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import UserSignUpForm
 from django.contrib.auth import login
@@ -16,7 +17,7 @@ def register(request):
         if form.is_valid():
             user = form.save()
             login(request, user)  # Log the user in
-            return redirect('home')  # Redirect to the home page or any other page
+            return redirect('home')  # Redirect to the home page
     else:
         form = UserSignUpForm()
     return render(request, 'registration/register.html', {'form': form})
@@ -29,7 +30,7 @@ def edit_profile(request):
         form = ProfileForm(request.POST, instance=profile)
         if form.is_valid():
             form.save()
-            return redirect('home')  # Adjust with the correct name of your home page URL
+            return redirect('home')
     else:
         form = ProfileForm(instance=profile)
     return render(request, 'users/edit_profile.html', {'form': form})
@@ -89,3 +90,5 @@ def user_search(request):
 def user_profile(request, username):
     user = get_object_or_404(User, username=username)
     return render(request, 'users/user_profile.html', {'profile_user': user})
+
+# End of Code I wrote

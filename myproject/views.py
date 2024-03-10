@@ -1,5 +1,4 @@
 from django.shortcuts import render
-# from Notifications.tasks import notify_users_about_new_material
 
 # Home View
 def home(request):

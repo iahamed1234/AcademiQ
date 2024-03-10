@@ -29,7 +29,7 @@ body {
 /* Targeting dropdown links on hover */
 .navbar .dropdown-menu a:hover {
     background-color: #f8f9fa !important; /* Light background on hover */
-    color: #007bff !important; /* Change text color on hover if needed */
+    color: #007bff !important; /* Change text color on hover */
 }
 .btn {
     background-color: #28a745;

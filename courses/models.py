@@ -11,7 +11,7 @@ class Course(models.Model):
     title = models.CharField(max_length=255)
     description = models.TextField()
     teacher = models.ForeignKey(
-        settings.AUTH_USER_MODEL,  # This ensures compatibility
+        settings.AUTH_USER_MODEL, 
         on_delete=models.CASCADE,
         related_name='taught_courses'
     )
@@ -23,7 +23,5 @@ class Course(models.Model):
 
     def __str__(self):
         return self.title
-
-
 
 # End of Code I wrote
